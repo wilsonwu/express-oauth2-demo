@@ -63,5 +63,5 @@ Response:
 ```
 Wilson Wu is a Software Architect!
 ```
-#All things done! Now you can follow the ```/auth/token``` and ```/users/profile``` code to extend your site to support oauth2
-#Enjoy your Express 4 + OAuth2 demo!
+# All things done! Now you can follow the ```/auth/token``` and ```/users/profile``` code to extend your site to support oauth2
+# Enjoy your Express 4 + OAuth2 demo!
