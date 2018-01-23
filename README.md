@@ -2,7 +2,7 @@
 Full OAuth2 demo with express 4 framework (http://expressjs.com/) and oauth2-server (https://github.com/oauthjs/node-oauth2-server) for nodejs.
 
 # Background
-I want to create a simple API service for my website, but some data update APIs need auth, I looked for oauth2 lite solution, but all of demos are not good. So I create one base on oauth2-server 2.4 (https://github.com/oauthjs/node-oauth2-server) (seems 3.0 has lots of problems, at least for me).
+I want to create a simple API service for my website, but some data update APIs need auth, I looked for oauth2 lite solution, but all of demos are not good. So I create one base on oauth2-server 2.4 (https://www.npmjs.com/package/node-oauth2-server) (seems 3.0 has lots of problems, at least for me).
 
 # Steps
 ## 1. Install all packages
