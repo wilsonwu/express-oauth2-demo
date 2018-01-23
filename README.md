@@ -12,22 +12,26 @@ npm install
 ```
 ## 2. Check models
 I create 2 models for this demo.
-###Memory Model
-File path: ```modules/memoryModel.js```
-Description: By default this demo use this model, so you don't need to change any code, you can run the demo (in follow steps), for this model, all data store in memory, if you restart the site, all things will disappare.
-###MSSQL Model
-File path: ```modules/mssqlModel.js```
-Description: Because I use Microsoft Azure, so I use SQL Server Database on Azure, the data table creation sql file at: modules/mssql.sql, just 3 tables need, after this, you can change one line code in file: modules/oauth.js, replace memoryModel to mssqlModel, and go to app.js to change your database connection information in global.conn, after that, creaete data in client table and user table, after that all things work as the memory model, you can run it.
+### Memory Model
+**File path:** ```modules/memoryModel.js```  
+**Description:** By default this demo use this model, so you don't need to change any code, you can run the demo (in follow steps), for this model, all data store in memory, if you restart the site, all things will disappare.
+### MSSQL Model
+**File path:** ```modules/mssqlModel.js```  
+**Description:** Because I use Microsoft Azure, so I use SQL Server Database on Azure, the data table creation sql file at: ```modules/mssql.sql```, just 3 tables need, after this, you can change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```mssqlModel```, and go to ```app.js``` to change your database connection information in ```global.conn```, after that, creaete data in client table and user table, after that all things work as the memory model, you can run it.
 ## 3. Start
 After you follow the step 2 to change model that you want, you can run:
+```
 npm start
+```
 Visit: http://127.0.0.1:3000, you can see the default home page of express 4.
 ## 4. Check information
-The first step of oauth2 is make sure you have client and user, if you are using memory model you can go to the file: modules/memoryModel.js to check the client and user information, by default:
+The first step of oauth2 is make sure you have client and user, if you are using memory model you can go to the file: ```modules/memoryModel.js``` to check the client and user information, by default:
+```
 clientId: wilsonwu
 clientSecret: lookingforjob
 username: iwilsonwu
 password: architect
+```
 If you are using mssql model, you can create your client and user information in you database tables.
 ## 5. Get Token
 After your client and user information ready, use Postman to send below request:
@@ -59,4 +63,5 @@ Response:
 ```
 Wilson Wu is a Software Architect!
 ```
-#All things done! enjoy your Express 4 + OAuth2 demo!
+#All things done! Now you can follow the ```/auth/token``` and ```/users/profile``` code to extend your site to support oauth2
+#Enjoy your Express 4 + OAuth2 demo!
