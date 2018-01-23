@@ -9,7 +9,7 @@ var sql = require('mssql');
 model.getAccessToken = function (bearerToken, callback) {
 	console.log(bearerToken);
 	new sql.ConnectionPool(global.conn).connect().then(pool => {
-		let sqlGetToken = "select * from onlytvb.token where token = '" + bearerToken + "' and tokentype = 'access';";
+		let sqlGetToken = "select * from token where token = '" + bearerToken + "' and tokentype = 'access';";
 		return pool.request()
 		.query(sqlGetToken)
 	}).then(result => {
@@ -35,7 +35,7 @@ model.getAccessToken = function (bearerToken, callback) {
 
 model.getRefreshToken = function (bearerToken, callback) {
 	new sql.ConnectionPool(global.conn).connect().then(pool => {
-		let sqlGetToken = "select * from onlytvb.token where token = '" + bearerToken + "' and tokentype = 'refresh';";
+		let sqlGetToken = "select * from token where token = '" + bearerToken + "' and tokentype = 'refresh';";
 		return pool.request()
 		.query(sqlGetToken)
 	}).then(result => {
@@ -61,7 +61,7 @@ model.getRefreshToken = function (bearerToken, callback) {
 
 model.getClient = function (clientId, clientSecret, callback) {
 	new sql.ConnectionPool(global.conn).connect().then(pool => {
-		let sqlGetClient = "select * from onlytvb.client where clientid = '" + clientId + "' and clientsecret = '" + clientSecret + "';";
+		let sqlGetClient = "select * from client where clientid = '" + clientId + "' and clientsecret = '" + clientSecret + "';";
 		return pool.request()
 		.query(sqlGetClient)
 	}).then(result => {
@@ -91,8 +91,8 @@ model.grantTypeAllowed = function (clientId, grantType, callback) {
 
 model.saveAccessToken = function (accessToken, clientId, expires, userId, callback) {
 	new sql.ConnectionPool(global.conn).connect().then(pool => {
-		let sqlClearToken = "delete from onlytvb.token where tokentype = 'access' and clientid = '" + clientId + "' and userid = " + userId.id + ";";
-		let sqlAddToken = "insert into onlytvb.token(token, tokentype, clientid, userid, expires) values('" + accessToken + "', 'access', '" + clientId + "', " + userId.id + ", '" + expires.toISOString() + "');";
+		let sqlClearToken = "delete from token where tokentype = 'access' and clientid = '" + clientId + "' and userid = " + userId.id + ";";
+		let sqlAddToken = "insert into token(token, tokentype, clientid, userid, expires) values('" + accessToken + "', 'access', '" + clientId + "', " + userId.id + ", '" + expires.toISOString() + "');";
 		console.log(sqlAddToken);
 		return pool.request()
 		.query(sqlClearToken + sqlAddToken)
@@ -109,8 +109,8 @@ model.saveAccessToken = function (accessToken, clientId, expires, userId, callba
 
 model.saveRefreshToken = function (refreshToken, clientId, expires, userId, callback) {
 	new sql.ConnectionPool(global.conn).connect().then(pool => {
-		let sqlClearToken = "delete from onlytvb.token where tokentype = 'refresh' and clientid = '" + clientId + "' and userid = " + userId.id + ";";
-		let sqlAddToken = "insert into onlytvb.token(token, tokentype, clientid, userid, expires) values('" + refreshToken + "', 'refresh', '" + clientId + "', " + userId.id + ", '" + expires.toISOString() + "');";
+		let sqlClearToken = "delete from token where tokentype = 'refresh' and clientid = '" + clientId + "' and userid = " + userId.id + ";";
+		let sqlAddToken = "insert into token(token, tokentype, clientid, userid, expires) values('" + refreshToken + "', 'refresh', '" + clientId + "', " + userId.id + ", '" + expires.toISOString() + "');";
 		return pool.request()
 		.query(sqlClearToken + sqlAddToken)
 	}).then(result => {
@@ -129,7 +129,7 @@ model.saveRefreshToken = function (refreshToken, clientId, expires, userId, call
  */
 model.getUser = function (username, password, callback) {
 	new sql.ConnectionPool(global.conn).connect().then(pool => {
-		let sqlGetUser = "select * from onlytvb.[user] where [username] = '" + username + "' and [password] = '" + password + "' and isactivated = 1 and isdeleted = 0 and isdisabled = 0;";
+		let sqlGetUser = "select * from [user] where [username] = '" + username + "' and [password] = '" + password + "' and isactivated = 1 and isdeleted = 0 and isdisabled = 0;";
 		return pool.request()
 		.query(sqlGetUser)
 	}).then(result => {
