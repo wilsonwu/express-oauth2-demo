@@ -63,5 +63,21 @@ Response:
 ```
 Wilson Wu is a Software Architect!
 ```
+If you use wrong token:
+```
+GET /users/profile/ HTTP/1.1
+Host: 127.0.0.1:3000
+Authorization: Bearer xxxxxx
+Cache-Control: no-cache
+Postman-Token: b82f4bf3-de52-c6fc-cdc9-160fa56f19a0
+```
+Response:
+```
+{
+    "code": 401,
+    "error": "invalid_token",
+    "error_description": "The access token provided is invalid."
+}
+```
 # All things done! Now you can follow the ```/auth/token``` and ```/users/profile``` code to extend your site to support oauth2
 # Enjoy your Express 4 + OAuth2 demo!
