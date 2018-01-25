@@ -44,7 +44,7 @@ Cache-Control: no-cache
 grant_type=password&client_id=wilsonwu&client_secret=lookingforjob&username=iwilsonwu&password=architect
 ```
 Response:
-```
+```js
 {
     "token_type": "bearer",
     "access_token": "16848b43898dba304f33d78a6f9671ddf96d9c04",
@@ -72,7 +72,7 @@ Cache-Control: no-cache
 Postman-Token: b82f4bf3-de52-c6fc-cdc9-160fa56f19a0
 ```
 Response:
-```
+```js
 {
     "code": 401,
     "error": "invalid_token",
