@@ -69,7 +69,6 @@ GET /users/profile/ HTTP/1.1
 Host: 127.0.0.1:3000
 Authorization: Bearer xxxxxx
 Cache-Control: no-cache
-Postman-Token: b82f4bf3-de52-c6fc-cdc9-160fa56f19a0
 ```
 Response:
 ```js
