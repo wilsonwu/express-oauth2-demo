@@ -11,7 +11,7 @@ After clone the code, run:
 npm install
 ```
 ## 2. Check models
-I create 2 models for this demo.
+I create 3 models for this demo.
 ### Memory Model
 **File path:** ```modules/memoryModel.js```  
 **Description:** By default this demo use this model, so you don't need to change any code, you can run the demo (in follow steps), for this model, all data store in memory, if you restart the site, all things will disappare.
