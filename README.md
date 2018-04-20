@@ -15,9 +15,12 @@ I create 2 models for this demo.
 ### Memory Model
 **File path:** ```modules/memoryModel.js```  
 **Description:** By default this demo use this model, so you don't need to change any code, you can run the demo (in follow steps), for this model, all data store in memory, if you restart the site, all things will disappare.
-### MSSQL Model
+### MS SQL Server Model
 **File path:** ```modules/mssqlModel.js```  
 **Description:** Because I use Microsoft Azure, so I use SQL Server Database on Azure, the data table creation sql file at: ```modules/mssql.sql```, just 3 tables need, after this, you can change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```mssqlModel```, and go to ```app.js``` to change your database connection information in ```global.conn```, after that, creaete data in client table and user table, after that all things work as the memory model, you can run it.
+### MySQL Model
+**File path:** ```modules/mysqlModel.js```  
+**Description:** I use a self-deploy MySQL Database, the data table creation sql file at: ```modules/mysql.sql```, just the database and 3 tables need, after this, you can change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```mysqlModel```, and go to ```modules/mysqlModel.js``` to change your database connection information in ```sqlPool```, after that, creaete data in client table and user table, after that all things work as the memory model, you can run it.
 ## 3. Start
 After you follow the step 2 to change model that you want, you can run:
 ```
