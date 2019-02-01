@@ -1,16 +1,5 @@
 var model = module.exports;
 
-var mysql = require('mysql');
-
-var sqlPool  = mysql.createPool({
-    multipleStatements: true,
-    connectionLimit : 50,
-    host            : 'localhost',
-    user            : 'root',
-    password        : 'password',
-    database        : 'db'
-});
-
 function js_yyyy_mm_dd_hh_mm_ss (datetime) {
     let year = "" + datetime.getFullYear();
     let month = "" + (datetime.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
@@ -22,7 +11,7 @@ function js_yyyy_mm_dd_hh_mm_ss (datetime) {
 }
 
 model.getAccessToken = function (bearerToken, callback) {
-	sqlPool.getConnection(function (err, connection) {
+	global.sqlPool.getConnection(function (err, connection) {
 		let sqlGetToken = "select * from token where token = '" + bearerToken + "' and tokentype = 'access';";
 		connection.query(sqlGetToken, function (error, results, fields) {
             connection.release();
@@ -47,7 +36,7 @@ model.getAccessToken = function (bearerToken, callback) {
 };
 
 model.getRefreshToken = function (bearerToken, callback) {
-	sqlPool.getConnection(function (err, connection) {
+	global.sqlPool.getConnection(function (err, connection) {
 		let sqlGetToken = "select * from token where token = '" + bearerToken + "' and tokentype = 'refresh';";
 		connection.query(sqlGetToken, function (error, results, fields) {
             connection.release();
@@ -72,7 +61,7 @@ model.getRefreshToken = function (bearerToken, callback) {
 };
 
 model.getClient = function (clientId, clientSecret, callback) {
-	sqlPool.getConnection(function (err, connection) {
+	global.sqlPool.getConnection(function (err, connection) {
 		let sqlGetClient = "select * from client where clientid = '" + clientId + "' and clientsecret = '" + clientSecret + "';";
 		connection.query(sqlGetClient, function (error, results, fields) {
             connection.release();
@@ -101,7 +90,7 @@ model.grantTypeAllowed = function (clientId, grantType, callback) {
 };
 
 model.saveAccessToken = function (accessToken, clientId, expires, userId, callback) {
-    sqlPool.getConnection(function (err, connection) {
+    global.sqlPool.getConnection(function (err, connection) {
 		let sqlClearToken = "delete from token where tokentype = 'access' and clientid = '" + clientId + "' and userid = " + userId.id + ";";
 		let sqlAddToken = "insert into token(token, tokentype, clientid, userid, expires) values('" + accessToken + "', 'access', '" + clientId + "', " + userId.id + ", '" + js_yyyy_mm_dd_hh_mm_ss(expires) + "');";
 		connection.query(sqlClearToken + sqlAddToken, function (error, results, fields) {
@@ -117,7 +106,7 @@ model.saveAccessToken = function (accessToken, clientId, expires, userId, callba
 };
 
 model.saveRefreshToken = function (refreshToken, clientId, expires, userId, callback) {
-    sqlPool.getConnection(function (err, connection) {
+    global.sqlPool.getConnection(function (err, connection) {
 		let sqlClearToken = "delete from onlytvb.token where tokentype = 'refresh' and clientid = '" + clientId + "' and userid = " + userId.id + ";";
 		let sqlAddToken = "insert into onlytvb.token(token, tokentype, clientid, userid, expires) values('" + refreshToken + "', 'refresh', '" + clientId + "', " + userId.id + ", '" + js_yyyy_mm_dd_hh_mm_ss(expires) + "');";
 		connection.query(sqlClearToken + sqlAddToken, function (error, results, fields) {
@@ -136,7 +125,7 @@ model.saveRefreshToken = function (refreshToken, clientId, expires, userId, call
  * Required to support password grant type
  */
 model.getUser = function (username, password, callback) {
-    sqlPool.getConnection(function (err, connection) {
+    global.sqlPool.getConnection(function (err, connection) {
 		let sqlGetUser = "select * from user where username = '" + username + "' and password = '" + password + "' and isactivated = 1 and isdeleted = 0 and isdisabled = 0;";
 		connection.query(sqlGetUser, function (error, results, fields) {
             connection.release();
