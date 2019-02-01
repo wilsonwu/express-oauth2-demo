@@ -41,3 +41,7 @@ CREATE TABLE user
     `datecreated` DATETIME NULL DEFAULT NOW(), 
     `dateupdated` DATETIME NULL DEFAULT NOW()
 );
+
+INSERT INTO `client` (clientid, clientsecret) VALUES ('wilsonwu', 'lookingforjob');
+INSERT INTO `user` (clientid, username, password) VALUES ('wilsonwu', 'iwilsonwu', 'architect');
+
