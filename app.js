@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var oauth = require('./modules/oauth');
+var sqlPool = require('./modules/sqlPool');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -28,16 +29,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 
-global.conn = {
-	user: 'user',
-	password: 'password',
-	server: 'server',
-	database: 'database',
-
-	options: {
-		encrypt: true // If you are using Microsoft Azure SQL Database, keep this.
-	}
-};
+global.sqlPool = sqlPool;
 
 app.use(oauth.errorHandler());
 
