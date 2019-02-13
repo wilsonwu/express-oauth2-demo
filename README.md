@@ -11,16 +11,21 @@ After clone the code, run:
 npm install
 ```
 ## 2. Check models
-I create 3 models for this demo.
+I create 4 models for this demo, MySql, Microsoft SQL Server, Data in Memory and JWT, by default it will use memory model, and except JWT model other 3 models' token are ramdomly.
+
 ### Memory Model
 **File path:** ```modules/memoryModel.js```  
 **Description:** By default this demo use this model, so you don't need to change any code, you can run the demo (in follow steps), for this model, all data store in memory, if you restart the site, all things will disappare.
+### JWT Model
+**File path:** ```modules/jwtModel.js```  
+**Description:** This model could help you integrate Json Web Token (JWT, for more JWT related information please visit: https://jwt.io/), because the client and user should be integrated with a type of database, so in this demo it use MySql, so please run the ```modules/mysql.sql``` script to create related database, tables and data, and go to ```modules/sqlPool.js``` to change your database connection information in ```sqlPool```, after that change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```jwtModel```, and go to ```app.js``` to change JWT secret: ```global.jwtSecret```, and JWT expired time: ```global.jwtExpiresIn```, after that you can run it.
 ### MS SQL Server Model
 **File path:** ```modules/mssqlModel.js```  
 **Description:** Because I use Microsoft Azure, so I use SQL Server Database on Azure, the data table creation sql file at: ```modules/mssql.sql```, just 3 tables need, after this, you can change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```mssqlModel```, and go to ```app.js``` to change your database connection information in ```global.conn```, after that, creaete data in client table and user table, after that all things work as the memory model, you can run it.
 ### MySQL Model
 **File path:** ```modules/mysqlModel.js```  
-**Description:** I use a self-deploy MySQL Database, the data table creation sql file at: ```modules/mysql.sql```, just the database and 3 tables need, after this, you can change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```mysqlModel```, and go to ```modules/mysqlModel.js``` to change your database connection information in ```sqlPool```, after that, creaete data in client table and user table, after that all things work as the memory model, you can run it.
+**Description:** I use a self-deploy MySQL Database, the data table creation sql file at: ```modules/mysql.sql```, database, 3 tables and two data created, after this, you can change one line code in file: ```modules/oauth.js```, replace ```memoryModel``` to ```mysqlModel```, and go to ```modules/sqlPool.js``` to change your database connection information in ```sqlPool```, after that you can run it.
+
 ## 3. Start
 After you follow the step 2 to change model that you want, you can run:
 ```
@@ -47,12 +52,22 @@ Cache-Control: no-cache
 grant_type=password&client_id=wilsonwu&client_secret=lookingforjob&username=iwilsonwu&password=architect
 ```
 Response:
+By default the ramdom token:
 ```js
 {
     "token_type": "bearer",
     "access_token": "16848b43898dba304f33d78a6f9671ddf96d9c04",
     "expires_in": 1209600,
     "refresh_token": "ac3b257a3459ac0a92f905d20a61593fdccdb151"
+}
+```
+Or for JWT:
+```js
+{
+    "token_type": "bearer",
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6Im5hbWVhcGkiLCJ1c2VySWQiOjEsImlhdCI6MTU0OTk4ODM0NywiZXhwIjoxNTUxMjg0MzQ3fQ.aBLwpH0SEwk3HaVuWb_bDxx9nvpknpghH5jHyrTNkVA",
+    "expires_in": 1209600,
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6Im5hbWVhcGkiLCJ1c2VySWQiOjEsImlhdCI6MTU0OTk4ODM0NywiZXhwIjoxNTUxMjg0MzQ3fQ.aBLwpH0SEwk3HaVuWb_bDxx9nvpknpghH5jHyrTNkVA"
 }
 ```
 Now you get the token, then run:
