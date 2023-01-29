@@ -1,7 +1,7 @@
 var oauthserver = require('oauth2-server');
 var memorystore = require('./memoryModel.js');
 
-var oauth = oauthserver({
+var oauth = new oauthserver({
     model: memorystore,
     grants: ['password','refresh_token'],
     accessTokenLifetime: 1209600,
